@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/output.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/customplayer.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script defer src="chat.js"></script>
+
+    <script defer src="./js/themeswitch.js"></script>
+    <script defer src="./js/videojs.js"> </script>
+
+    <script defer src="./js/menu.js"></script>
+    <script defer src="./js/countdown.js"></script>
+    <title>LiveBeat.fi</title>
+</head>
+
+<body class="dark:bg-black ">
+
+
+    <!-- Navigation -->
+    <nav class="p-5 shadow dark:bg-main bg-white md:flex w-[100%] md:items-center md:justify-between z-20 fixed  ">
+
+        <div class="flex justify-between items-center ">
+            <span class="text-2xl cursor-pointer dark:text-white font-sans">
+                <a href="#">
+                    <img class="h-20 inline transform hover:scale-125 ease-out duration-1000 dark:hidden"
+                        src="./img/karamalmielokuvafestivaalit-light.png" alt="Logo">
+
+                    <img class="h-20 inline transform hover:scale-125 ease-out duration-1000 hidden dark:inline"
+                        src="./img/karamalmielokuvafestivaalit-dark.png" alt="Logo">
+
+
+                </a>
+            </span>
+
+            <span class=" text-3xl cursor-pointer mx-2 md:hidden block dark:text-white">
+                <ion-icon name="menu" onclick="Menu(this)"></ion-icon>
+            </span>
+        </div>
+
+        <ul class=" dark:bg-main bg-white md:flex md:items-center z-[-1]  md:z-auto md:static absolute dark:text-white  w-[100%]
+        h-[100vh] md:h-[50px] left-0
+                    md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px]">
+            <li class="mx-4 my-6 md:my-0 hover:translate-y-1 transform-gpu duration-75 ease-in">
+                <a href="#" class="text-xl hover:text-orange-500  ">Tapahtuman aikataulu</a>
+            </li>
+            <li class="mx-4 my-6 md:my-0 hover:translate-y-1 transform-gpu duration-75 ease-in">
+                <a href="#" class="text-xl hover:text-orange-500 duration-500">Sponsorit</a>
+            </li>
+            <li class="mx-4 my-6 md:my-0 hover:translate-y-1 transform-gpu duration-75 ease-in">
+                <a href="#" class="text-xl hover:text-orange-500 duration-500">Info</a>
+            </li>
+            <li class="mx-4 my-6 md:my-0 hover:translate-y-1 transform-gpu duration-75 ease-in">
+                <a href="#" class="text-xl hover:text-orange-500 duration-500">Meistä</a>
+            </li>
+            <li class="mx-4 my-6 md:my-0 hover:translate-y-1 transform-gpu duration-75 ease-in">
+                <a href="#" class="text-xl hover:text-orange-500 duration-500">Tue tapahtumaa</a>
+            </li>
+            <li>
+                <ion-icon id="moon" class="text-3xl" name="moon-outline"></ion-icon>
+                <ion-icon id="sun" class="text-3xl" name="sunny-outline"></ion-icon>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- alusta -->
+    <div class="h-24 bg-white relative">
+        <h1>alusta</h1>
+    </div>
+
+    <!-- Fixed Banner -->
+    <div class="bg-contain bg-center h-40 flex  relative hover:filter hover:brightness-75 transition duration-500 shadow-2xl "
+        style="background-image: url('../img/photo-1533174072545-7a4b6ad7a6c3.jpeg');">
+    </div>
+
+    <div class="lg:flex flex-row-reverse rounded-md ">
+        <!-- tietoa, sloga ja sellasta -->
+        <div class="dark:bg-main dark:text-white flex h-auto  flex-col items-center z-10 lg:w-1/2 ">
+            <h1 class="mt-10 text-lg hover:translate-y-1 transform-gpu duration-75 ease-in">Karamalmin
+                Elokuvafestivaalit 2023</h1>
+            <p
+                class="mt-20 max-w-2xl text-sm tracking-widest mb-16 w-[80%] hover:translate-x-4 transform-gpu  duration-75 ease-linear">
+                Tervetuloa Karamalmin elokuvafestivaaleille, missä intohimo elokuviin kohtaa kulttuurisen
+                monimuotoisuuden. Liity meihin
+                kokemaan unohtumattomia hetkiä valkokankaalla ja juhlimaan elokuvataiteen parhaita teoksia.</p>
+
+            <h3 class="text-lg">Tapahtuman alkuun:</h3>
+            <span class="" id="countdown">Loading...</span>
+
+            <h3 class=" font-bold m-8">Seuraa meitä somessa</h3>
+            <div class="flex justify-center items-center mt-10 mb-10 gap-6 animate-bounce">
+                <a href="#" class="mx-2 hover:text-gray-500 ">
+                    <ion-icon name="logo-facebook" class="text-4xl"></ion-icon>
+                </a>
+                <a href="#" class="mx-2 hover:text-gray-500">
+                    <ion-icon name="logo-instagram" class="text-4xl"></ion-icon>
+                </a>
+                <a href="#" class="mx-2 hover:text-gray-500">
+                    <ion-icon name="logo-twitter" class="text-4xl"></ion-icon>
+                </a>
+                <a href="#" class="mx-2 hover:text-gray-500">
+                    <ion-icon name="logo-youtube" class="text-4xl"></ion-icon>
+                </a>
+            </div>
+        </div>
+
+        <!-- striimi -->
+        <div class="lg:w-1/2 flex flex-col h-full">
+            <!-- video section -->
+            <div>
+                <video id="my-video" class="video-js vjs-theme-fantasy" preload="auto" width="max-w-2xl"
+                    poster="./img/moviefestival.jpg" data-setup='{"fluid" : true}'>
+                    <source src="http://195.148.104.124:1935/jakelu/huva/playlist.m3u8" type="application/x-mpegURL" />
+                    <source src="./video/error.mp4" type="video/mp4" />
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+            </div>
+
+            <!-- chat section -->
+            <div id="chat-section" class="bg-white dark:bg-black" style="height: 40vh;">
+                <!-- Messages list -->
+                <div id="messages-container" class=" flex-grow overflow-y-auto px-3 bg-white dark:bg-black">
+                    <ul id="messages"></ul>
+                </div>
+
+                <p class="dark:text-white" id="conversation-header">Liity mukaan keskusteluun kanssamme!</p>
+                <!-- Join Form -->
+                <div class="py-2 px-3" id="login">
+                    <form class="flex" id="join-form">
+                        <input placeholder="Anna käyttäjänimi..."
+                            class="block mx-4 p-2.5 w-2/3 text-sm text-red-500a border-4 border-orange-500 shadow-lg shadow-orange-500 rounded-lg outline-none"
+                            id="username">
+                        <button class=" bg-orange-600 text-lg rounded-lg p-2 text-white" type="submit">Liity
+                            chat</button>
+                    </form>
+                </div>
+
+                <!-- Chat Input Form -->
+                <div class="flex items-center justify-between py-2 px-3 dark:bg-black" id="chat">
+                    <form class="flex flex-row m-2 justify-end " id="input-form">
+
+                        <input placeholder="write a message.."
+                            class=" block mx-4 p-2.5 w-2/3 text-sm text-red-500a border-4 border-orange-500 shadow-lg shadow-orange-500 rounded-lg outline-none"
+                            id="message" autocomplete="off">
+                        <span class="flex items-center flex-col-reverse">
+                            <p class=" dark:text-white">Chat</p>
+                            <ion-icon class="bg-blue-400 p-3 rounded-lg font-medium " name="chatbox-outline"></ion-icon>
+                        </span>
+                        <button class=" text-w bg-orange-600 text-lg rounded-lg px-8 rounde  text-white">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- footer -->
+    <footer class="bg-fifth h-36 text-lg  font-bold font-sans flex items-center justify-evenly flex-row ">
+        <h1>Sponsorit</h1>
+        <a href="#" hover:text-gray-500 ">
+                <img class=" h-12 w-auto" src="./img/NOKIA.jpeg" alt="">
+        </a>
+        <a href="#" class="mx-2  hover:text-gray-500">
+            <img class="h-12 w-auto" src="./img/metropolia_s_orange.png" alt="">
+        </a>
+        <a href="#" class="mx-2 h-7 w-auto hover:text-gray-500">
+            <img class="h-12 w-auto" src="./img/compass-group-logo.png" alt="">
+        </a>
+    </footer>
+    <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
+
+</body>
+
+</html>
