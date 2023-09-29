@@ -19,6 +19,7 @@
 
     <script defer src="./js/menu.js"></script>
     <script defer src="./js/countdown.js"></script>
+
     <title>LiveBeat.fi</title>
 </head>
 
@@ -131,7 +132,7 @@
             <div id="chat-section" class="bg-white dark:bg-black" style="height: 40vh;">
                 <!-- Messages list -->
                 <div id="messages-container" class=" flex-grow overflow-y-auto px-3 bg-white dark:bg-black">
-                    <ul id="messages"></ul>
+                    <ul class="break-words overflow-hidden" id="messages"></ul>
                 </div>
 
                 <p class="dark:text-white" id="conversation-header">Liity mukaan keskusteluun kanssamme!</p>
@@ -141,6 +142,7 @@
                         <input placeholder="Anna käyttäjänimi..."
                             class="block mx-4 p-2.5 w-2/3 text-sm text-red-500a border-4 border-orange-500 shadow-lg shadow-orange-500 rounded-lg outline-none"
                             id="username">
+
                         <button class=" bg-orange-600 text-lg rounded-lg p-2 text-white" type="submit">Liity
                             chat</button>
                     </form>
@@ -150,13 +152,11 @@
                 <div class="flex items-center justify-between py-2 px-3 dark:bg-black" id="chat">
                     <form class="flex flex-row m-2 justify-end " id="input-form">
 
+                        <div id="typingStatus"></div>
                         <input placeholder="write a message.."
                             class=" block mx-4 p-2.5 w-2/3 text-sm text-red-500a border-4 border-orange-500 shadow-lg shadow-orange-500 rounded-lg outline-none"
                             id="message" autocomplete="off">
-                        <span class="flex items-center flex-col-reverse">
-                            <p class=" dark:text-white">Chat</p>
-                            <ion-icon class="bg-blue-400 p-3 rounded-lg font-medium " name="chatbox-outline"></ion-icon>
-                        </span>
+
                         <button class=" text-w bg-orange-600 text-lg rounded-lg px-8 rounde  text-white">Send</button>
                     </form>
                 </div>

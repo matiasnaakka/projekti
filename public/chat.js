@@ -9,6 +9,7 @@ const joinForm = document.getElementById('join-form');
 const usernameInput = joinForm.getElementsByTagName('input')[0];
 const messagesContainer = document.getElementById('messages-container');
 const chatContainer = document.getElementById('chat-section');
+const conversationhdr = document.getElementById('conversation-header');
 
 
 
@@ -44,12 +45,14 @@ socket.on('chat message', (msg) => {
     if (msg.startsWith('You:')) {
         item.textContent = msg;
         item.classList.add(...'text-white bg-orange-600 m-5 w-fit rounded-xl p-2'.split(' '));
+
     } else {
         item.textContent = msg;
         item.classList.add(...'text-left text-white bg-orange-300 m-5 w-fit rounded-xl p-2 ml-52'.split(' '));
 
     }
     item.classList.add
+    conversationhdr.style.display = 'none';
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
 });

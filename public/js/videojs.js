@@ -18,6 +18,4 @@ videojs(myPlayer, {
 });
 
 
-let player = videojs('vid1', {
-    responsive: true
-});
+
